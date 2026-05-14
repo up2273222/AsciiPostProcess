@@ -74,12 +74,7 @@ Shader "Unlit/Sobel"
                 ySum += Luminance(_MainTex.Sample(sampler_MainTex,getUvOffset(i.uv,float2(0,1)))) * 2;
                 ySum += Luminance(_MainTex.Sample(sampler_MainTex,getUvOffset(i.uv,float2(1,1)))) * 1;
                 
-   
-
-                //return float4(xSum * xSum,ySum * ySum,0,1);
-                
-               // float mag = sqrt((xSum * xSum) + (ySum * ySum));
-               float mag = abs(xSum) + abs(ySum);
+                float mag = abs(xSum) + abs(ySum);
                 if (mag > _edgeThreshold)
                 {
                    return float4(0,0,0,1);

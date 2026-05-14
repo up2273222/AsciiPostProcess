@@ -34,7 +34,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _brightness: 1
-    - _cellSize: 9
+    - _cellSize: 8
     - _testValue: 1
     m_Colors: []
   m_BuildTextureStacks: []

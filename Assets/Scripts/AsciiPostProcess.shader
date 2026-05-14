@@ -56,16 +56,13 @@ Shader "Unlit/AsciiPostProcess"
                 //Get luminance value
                 float3 pixelColor = _MainTex.Sample(sampler_MainTex,ScreenUV).xyz;
                 float luminance = Luminance(pixelColor);
-                luminance = floor(luminance * 10)/10;
-                luminance = pow(luminance,0.5f);
-                luminance = saturate(luminance);
+                luminance = max(0, (floor(luminance * 10) - 1 )) / 10.0f;
+                if (luminance > 0.9) {luminance = 0.9;}
                 
                 //Read from tileset
                 float2 cellUV = frac(i.uv * _ScreenParams.xy / _cellSize);
                 float2 tilesetUV = float2(luminance + cellUV.x * 0.1f, cellUV.y);
                 
-              //  return _AsciiTilesetTex.Sample(sampler_AsciiTilesetTex,tilesetUV);
-               // return float4(pixelColor * _AsciiTilesetTex.Sample(sampler_AsciiTilesetTex,tilesetUV).r,1.0);
                 return _AsciiTilesetTex.Sample(sampler_AsciiTilesetTex,tilesetUV) * _MainTex.Sample(sampler_MainTex,ScreenUV);
 
                  
